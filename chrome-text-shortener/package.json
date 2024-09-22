@@ -13,6 +13,11 @@
   "author": "",
   "license": "ISC",
   "description": "",
+  "icons": {
+    "16": "48x.png",
+    "48": "48x.png",
+    "128": "128x.png"
+  },
   "devDependencies": {
     "@types/chrome": "^0.0.271",
     "concurrently": "^9.0.1",
