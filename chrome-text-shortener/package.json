@@ -1,0 +1,26 @@
+{
+  "name": "chrome-text-shortener",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc && npm run copy-files",
+    "copy-files": "copyfiles -u 1 src/**/*.html src/**/*.css public/* manifest.json dist/",
+    "watch:ts": "tsc --watch",
+    "watch:files": "nodemon --watch src --watch public --watch manifest.json --ext html,css,json --exec \"npm run copy-files\"",
+    "dev": "concurrently \"npm run watch:ts\" \"npm run watch:files\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/chrome": "^0.0.271",
+    "concurrently": "^9.0.1",
+    "copyfiles": "^2.4.1",
+    "nodemon": "^3.1.7",
+    "typescript": "^5.6.2"
+  },
+  "dependencies": {
+    "axios": "^1.7.7"
+  }
+}

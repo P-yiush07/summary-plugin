@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Text Shortener</title>
+  <style>
+    body {
+      width: 400px;
+      height: 500px; /* Increased height */
+      padding: 16px;
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+   .container {
+      background-color: white;
+      border-radius: 8px;
+      padding: 16px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-height: calc(100% - 32px); /* Subtract top and bottom padding */
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+    h2 {
+      margin-top: 0;
+      color: #333;
+    }
+    #selectedText, #shortenedText {
+      border-radius: 4px;
+      padding: 8px;
+      flex-grow: 1; /* Allow this to grow and fill available space */
+      overflow-y: auto;
+      margin-bottom: 16px;
+    }
+    #loading {
+      display: none;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+    .button-container {
+      display: flex;
+      justify-content: space-between;
+    }
+    button {
+      padding: 10px 16px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 14px;
+      margin: 4px 2px;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: background-color 0.3s;
+      border: none;
+      color: white;
+    }
+    #shortenBtn {
+      background-color: #4CAF50;
+    }
+    #shortenBtn:hover {
+      background-color: #45a049;
+    }
+    #resetBtn {
+      background-color: #f44336;
+    }
+    #resetBtn:hover {
+      background-color: #d32f2f;
+    }
+    /* New styles for auth forms */
+    #authForms {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 100%;
+    }
+    #loginForm, #signupForm {
+      display: none;
+    }
+    .auth-input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    .auth-button {
+      width: 100%;
+      background-color: #4CAF50;
+    }
+    .auth-button:hover {
+      background-color: #45a049;
+    }
+    .toggle-form {
+      text-align: center;
+      margin-top: 10px;
+      color: #4CAF50;
+      cursor: pointer;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    #logoutBtn {
+      background-color: #2196F3;
+      margin-left: auto;
+      display: block;
+    }
+    #logoutBtn:hover {
+      background-color: #1976D2;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div id="authForms">
+      <div id="loginForm">
+        <h2>Login</h2>
+        <input type="email" id="loginEmail" class="auth-input" placeholder="Email" required>
+        <input type="password" id="loginPassword" class="auth-input" placeholder="Password" required>
+        <button id="loginBtn" class="auth-button">Login</button>
+        <p class="toggle-form" id="showSignup">Don't have an account? Sign up</p>
+      </div>
+      <div id="signupForm">
+        <h2>Sign Up</h2>
+        <input type="email" id="signupEmail" class="auth-input" placeholder="Email" required>
+        <input type="password" id="signupPassword" class="auth-input" placeholder="Password" required>
+        <button id="signupBtn" class="auth-button">Sign Up</button>
+        <p class="toggle-form" id="showLogin">Already have an account? Log in</p>
+      </div>
+    </div>
+    <div id="content" style="display: none;">
+      <div class="header">
+        <h2>Text Shortener</h2>
+        <button id="logoutBtn">Logout</button>
+      </div>
+      <div id="selectedText"></div>
+      <div id="shortenedText"></div>
+      <div id="loading">Shortening text...</div>
+      <div class="button-container">
+        <button id="shortenBtn">Shorten Text</button>
+        <button id="resetBtn">Reset</button>
+      </div>
+    </div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
