@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Text Shortener</title>
+  <title>Summary Maker</title>
   <style>
     body {
       width: 400px;
@@ -13,7 +13,6 @@
       background-color: #f0f0f0;
       margin: 0;
       display: flex;
-      align-items: center;
       justify-content: center;
     }
    .container {
@@ -78,23 +77,24 @@
       flex-direction: column;
       justify-content: center;
       height: 100%;
+      width: 100%; /* Ensure full width */
     }
     #loginForm, #signupForm {
       display: none;
+      width: 100%; /* Ensure full width */
     }
     .auth-input {
-      width: 100%;
+      width: calc(100% - 20px); /* Subtract padding from width */
       padding: 10px;
       margin-bottom: 10px;
       border: 1px solid #ddd;
       border-radius: 4px;
+      box-sizing: border-box; /* Include padding in width calculation */
     }
     .auth-button {
       width: 100%;
       background-color: #4CAF50;
-    }
-    .auth-button:hover {
-      background-color: #45a049;
+      box-sizing: border-box; /* Include padding in width calculation */
     }
     .toggle-form {
       text-align: center;
@@ -115,6 +115,19 @@
     }
     #logoutBtn:hover {
       background-color: #1976D2;
+    }
+    #shortenedText {
+      white-space: pre-wrap;
+      font-family: Arial, sans-serif;
+      line-height: 1.5;
+      padding: 10px;
+      background-color: #f9f9f9;
+      border-radius: 5px;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+    #shortenedText p {
+      margin-bottom: 10px;
     }
   </style>
 </head>
@@ -138,7 +151,7 @@
     </div>
     <div id="content" style="display: none;">
       <div class="header">
-        <h2>Text Shortener</h2>
+        <h2>Summary Maker</h2>
         <button id="logoutBtn">Logout</button>
       </div>
       <div id="selectedText"></div>

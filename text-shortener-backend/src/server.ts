@@ -2,6 +2,7 @@ import dotenv from 'dotenv';
 import express, { Request, Response, NextFunction } from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import { summarizeText } from './summarizer';
 
 dotenv.config();
 
@@ -60,10 +61,20 @@ function authenticateToken(req: AuthRequest, res: Response, next: NextFunction) 
   });
 }
 
-app.post('/shorten', authenticateToken, (req: AuthRequest, res: Response) => {
-  // Implement your text shortening logic here
-  // This is where you'd call the OpenAI API
-  res.json({ shortenedText: "Your shortened text here" });
+app.post('/shorten', authenticateToken, async (req: AuthRequest, res: Response) => {
+  try {
+    const { text } = req.body;
+    
+    if (!text) {
+      return res.status(400).json({ error: 'No text provided for summarization' });
+    }
+
+    const summary = await summarizeText(text);
+    res.json({ shortenedText: summary });
+  } catch (error) {
+    console.error('Error in text summarization:', error);
+    res.status(500).json({ error: 'An error occurred during text summarization' });
+  }
 });
 
 const PORT = process.env.PORT || 3000;

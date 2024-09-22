@@ -177,8 +177,14 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             body: JSON.stringify({ text: result.selectedText }),
           })
-          .then(response => response.json())
+          .then(response => {
+            if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+          })
           .then((data: ShortenResponse) => {
+            console.log('Received shortened text:', data.shortenedText);
             shortenedTextElement.textContent = data.shortenedText;
             shortenedTextElement.style.display = 'block';
             resetBtn.style.display = 'block';
@@ -186,11 +192,14 @@ document.addEventListener('DOMContentLoaded', () => {
           })
           .catch(error => {
             console.error('Error:', error);
-            alert('Failed to shorten text');
+            alert('Failed to shorten text: ' + error.message);
           })
           .finally(() => {
             loadingElement.style.display = 'none';
           });
+        } else {
+          console.error('No access token or selected text found');
+          alert('Please select text and ensure you are logged in');
         }
       });
     });
